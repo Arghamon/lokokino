@@ -51,9 +51,10 @@ const httpsOptions = {
     cert: fs.readFileSync('./security/cert.pem')
 }
 
-const server = https.createServer(httpsOptions, app)
+const server = https.createServer(httpsOptions, app);
+const port = process.env.PORT || 4000;
 
-server.listen(4000, () => {
+server.listen(port, () => {
     console.log('server started on port ' + 4000)
 });
 
