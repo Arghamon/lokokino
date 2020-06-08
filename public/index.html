@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="question">
         <header>
             <div class="logo"></div>
             <div class="page">Questions</div>
@@ -34,7 +35,8 @@
                 </div>
             </div>
             <div class="content">
-                <table id="table">
+                <button class="add-question" v-on:click="openModal">Add Question</button>
+                <table id="table" v-if="items.length">
                     <tr>
                         <th>Photo</th>
                         <th>Answers</th>
@@ -42,15 +44,16 @@
                     </tr>
                     <tbody id="tbody">
                         <tr v-for="(item, index) in items">
-                            <td><img src="./assets/1.jpg" /></td>
+                            <td><img v-bind:src="item.image" /></td>
                             <td>
-                                <div>
-                                    <span><em>1)</em> {{name}}</span>
-                                    <span><em>1)</em> {{item}}</span>
-                                </div>
-                                <div>
-                                    <span><em>1)</em> kukuri</span>
-                                    <span><em>1)</em> kukuri</span>
+                                <span>
+                                    <em>1)</em>
+                                    {{item.title}}
+                                </span>
+                                <span v-for="(answer, index) in item.answers">
+                                    <em>{{ index + 2 }})</em>
+                                    {{answer}}
+                                </span>
                             </td>
                             <td>
                                 edit
@@ -58,19 +61,25 @@
                         </tr>
                     </tbody>
                 </table>
+                <span v-else>...wait</span>
+            </div>
+        </div>
+        <div class="modal" v-if="modal">
+            <div id="notClose">
+                <input type="file" id="file" style="visibility: hidden"/>
+                <label for="file">
+                    Image
+                </label>
+                <div id="image" class="inputfile"></div>
+                <input type="text" id="title" class="answer-input" /><br />
+                <input type="text" class="answer-input answer" /><br />
+                <input type="text" class="answer-input answer" /><br />
+                <input type="text" class="answer-input answer" /><br />
+                <button>დამატება</button>
+                <button v-on:click="closeModal">დახურვა</button>
             </div>
         </div>
     </div>
-    </div>
-    <input type="file" id="file" /><br />
-    <div id="image"></div>
-    <input type="text" id="title" /><br />
-    <input type="text" class="answer" /><br />
-    <input type="text" class="answer" /><br />
-    <input type="text" class="answer" /><br />
-    <button>დამატება</button>
-
-    <div id="container"></div>
 
 
 
