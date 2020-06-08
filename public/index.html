@@ -34,76 +34,43 @@
                 </div>
             </div>
             <div class="content">
-                <table id="customers">
+                <table id="table">
                     <tr>
-                      <th>Company</th>
-                      <th>Contact</th>
-                      <th>Country</th>
+                        <th>Photo</th>
+                        <th>Answers</th>
+                        <th></th>
                     </tr>
-                    <tr>
-                      <td>Alfreds Futterkiste</td>
-                      <td>Maria Anders</td>
-                      <td>Germany</td>
-                    </tr>
-                    <tr>
-                      <td>Berglunds snabbköp</td>
-                      <td>Christina Berglund</td>
-                      <td>Sweden</td>
-                    </tr>
-                    <tr>
-                      <td>Centro comercial Moctezuma</td>
-                      <td>Francisco Chang</td>
-                      <td>Mexico</td>
-                    </tr>
-                    <tr>
-                      <td>Ernst Handel</td>
-                      <td>Roland Mendel</td>
-                      <td>Austria</td>
-                    </tr>
-                    <tr>
-                      <td>Island Trading</td>
-                      <td>Helen Bennett</td>
-                      <td>UK</td>
-                    </tr>
-                    <tr>
-                      <td>Königlich Essen</td>
-                      <td>Philip Cramer</td>
-                      <td>Germany</td>
-                    </tr>
-                    <tr>
-                      <td>Laughing Bacchus Winecellars</td>
-                      <td>Yoshi Tannamuri</td>
-                      <td>Canada</td>
-                    </tr>
-                    <tr>
-                      <td>Magazzini Alimentari Riuniti</td>
-                      <td>Giovanni Rovelli</td>
-                      <td>Italy</td>
-                    </tr>
-                    <tr>
-                      <td>North/South</td>
-                      <td>Simon Crowther</td>
-                      <td>UK</td>
-                    </tr>
-                    <tr>
-                      <td>Paris spécialités</td>
-                      <td>Marie Bertrand</td>
-                      <td>France</td>
-                    </tr>
-                  </table>
+                    <tbody id="tbody">
+                        <tr v-for="(item, index) in items">
+                            <td><img src="./assets/1.jpg" /></td>
+                            <td>
+                                <div>
+                                    <span><em>1)</em> {{name}}</span>
+                                    <span><em>1)</em> {{item}}</span>
+                                </div>
+                                <div>
+                                    <span><em>1)</em> kukuri</span>
+                                    <span><em>1)</em> kukuri</span>
+                            </td>
+                            <td>
+                                edit
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-    <!-- <input type="file" id="file" /><br />
+    </div>
+    <input type="file" id="file" /><br />
     <div id="image"></div>
     <input type="text" id="title" /><br />
     <input type="text" class="answer" /><br />
     <input type="text" class="answer" /><br />
     <input type="text" class="answer" /><br />
     <button>დამატება</button>
-    
-    <div id="container"></div> -->
 
+    <div id="container"></div>
 
 
 
@@ -118,6 +85,7 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-storage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
 
     <script>
         // Your web app's Firebase configuration
@@ -135,6 +103,7 @@
     </script>
 
     <script src="index.js"></script>
+    <script src="quiz.js"></script>
 
 </body>
 

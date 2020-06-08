@@ -12,6 +12,7 @@ header {
   padding-right: 100px;
 }
 
+
 .main {
   display: flex;
   flex-direction: row;
@@ -23,6 +24,10 @@ header {
   width: 270px;
   height: 100%;
   background: url("./assets/logo.svg") no-repeat #16191c center;
+}
+
+.page {
+  width: 50%;
 }
 
 .sidebar {
@@ -83,14 +88,14 @@ ul li:hover {
   flex-direction: column;
 }
 
-#customers {
+#table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#customers td,
-#customers th {
+#table td,
+#table th {
   border: 1px solid #e3e3e7;
   padding: 8px;
 }
@@ -101,18 +106,22 @@ ul li:hover {
   margin-left: 177px;
 }
 
-#customers tr:nth-child(odd) {
+#table tr:nth-child(odd) {
   background-color: #f2f2f2;
 }
 
-#customers tr:hover {
+#table tr:hover {
   background-color: #e3e3e7;
 }
 
-#customers th {
+#table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: #f6f6f7;
   color: #909599;
+}
+
+td img {
+  height: 61px;
 }
