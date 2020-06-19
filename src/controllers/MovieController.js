@@ -4,12 +4,12 @@ const ErrorParser = require('../helpers/errorParser');
 const Moviecontroller = function () { }
 
 function okRsponse(res, data) {
-    if (!data) return res.json({ status: 0, message: 'object not found' })
-    res.status(200).json({ status: 1, data })
+    if (!data) return res.status(404).json({ message: 'object not found' })
+    res.status(200).json({ data })
 }
 
 function errorRsponse(res, code, e) {
-    res.status(500).json({ status: 0, code, message: ErrorParser.GetErrorObject(e.message, e.name) })
+    res.status(500).json({ code, message: ErrorParser.GetErrorObject(e.message, e.name) })
 }
 
 Moviecontroller.prototype.Index = function (req, res) {
@@ -45,8 +45,8 @@ Moviecontroller.prototype.Delete = function (req, res) {
     const { id } = req.params;
     Movie.deleteOne({ _id: id })
         .then((data) => {
-            if (data.n < 1) return res.status(400).json({ status: 0, message: 'object not found' });
-            res.status(200).json({ status: 1, message: `${data.n} object was deleted` })
+            if (data.n < 1) return res.status(404).json({ message: 'object not found' });
+            res.status(200).json({ message: `${data.n} object was deleted` })
         })
         .catch(e => errorRsponse(res, 101, e));
 }
@@ -56,7 +56,7 @@ Moviecontroller.prototype.Autocomplete = function (req, res) {
     Movie.find({ title: { $regex: title, $options: 'i' } }).limit(5).then((result) => {
         console.log(result);
         res.json({ result })
-    }).catch( e => console.log(e))
+    }).catch(e => console.log(e))
 }
 
 

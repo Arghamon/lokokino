@@ -20,6 +20,7 @@ app.route('/quiz')
     .get(QuizController.Index)
     .post(QuizController.Add)
     .put(QuizController.Update)
+    .delete(QuizController.Delete)
 
 
 app.route('/movies')
