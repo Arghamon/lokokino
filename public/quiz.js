@@ -4,9 +4,20 @@ new Vue({
         activeId: null,
         items: [],
         pending: false,
+        modal: false,
+        file: null,
+        imageSrc: null,
+        storage: null,
+        storageRef: null,
+        answers: [],
+        title: "",
+        comment: "",
+        addError: "",
     },
     mounted: async function () {
-        await this.getQuiz()
+        this.storage = firebase.storage();
+        this.storageRef = firebase.storage().ref();
+        await this.getQuiz();
     },
     methods: {
         toggleActive: function (id) {
@@ -24,7 +35,57 @@ new Vue({
             this.pending = false;
             console.log(this.items)
         },
-        addQuestion: async function () { },
+        openModal: function () {
+            this.modal = true;
+        },
+        closeModal: function () {
+            this.modal = false;
+        },
+        change: function ({ target }) {
+            this.addError = false;
+            if (target.name == 'answer') return;
+            target.name == 'title' ? this.title = target.value : this.comment = target.value
+        },
+        addQuestion: async function () {
+            if (!this.title || !this.answers.length || !this.imageSrc) {
+                this.addError = true;
+                return;
+            }
+            movie = {};
+            movie.title = this.title;
+            movie.answers = this.answers;
+            movie.image = this.imageSrc;
+
+            let result = await fetch('quiz', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(movie)
+            });
+            let response = await result.json();
+            this.closeModal();
+            await this.getQuiz();
+        },
+        submit: async function () {
+            let answerInputs = document.getElementsByName('answer');
+            answerInputs.forEach(el => this.answers.push(el.value));
+            console.log('submit');
+            await this.addQuestion();
+        },
+        selectImage: function (e) {
+            this.addError = false;
+            this.file = e.target.files[0];
+            var imageRef = this.storageRef.child(`images/${this.file.name}`);
+            imageRef.put(this.file).then((snapshot) => {
+                console.log(snapshot);
+                return imageRef.getDownloadURL();
+            }).then(url => {
+                this.imageSrc = url;
+                console.log(url);
+            });
+        },
+        clickChange: function () {
+            document.querySelector('input[type="file"]').click();
+        },
         deleteQuestion: async function (id) {
             console.log(id)
             const body = JSON.stringify({ id })

@@ -280,6 +280,9 @@ div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing
   height: 24px;
   margin-right: 5px;
   color: #fff;
+  background-color: #707070;
+}
+div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing div.quiz_column div.quiz_column_body div.quiz_item div.quiz_answers ul li a span.correct {
   background-color: #28c358;
 }
 div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing div.quiz_column div.quiz_column_body div.quiz_item div.quiz_answers ul li a strong {
@@ -327,6 +330,146 @@ div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing
 div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing div.quiz_column div.quiz_footer {
   height: 57px;
   background-color: #fff;
+}
+
+.modal {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal_container {
+  width: 1300px;
+  height: 700px;
+  background-color: #fff;
+  padding: 80px;
+}
+.modal_container .error {
+  color: red;
+}
+.modal_header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 29px;
+}
+.modal_header .close {
+  cursor: pointer;
+}
+.modal_content {
+  display: grid;
+  grid-template-columns: 490px 610px;
+  grid-column-gap: 52px;
+}
+.modal_content .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal_content .left img {
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 17px;
+}
+.modal_content .left div {
+  width: 100%;
+  height: 56px;
+  margin-bottom: 56px;
+  background: #e5eaf9;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  color: #0735bf;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal_content .left div svg {
+  margin-right: 5px;
+}
+.modal_content .left input {
+  padding-left: 28px;
+  width: 100%;
+  height: 56px;
+  border: 1px solid #dcdce0;
+  border-radius: 3px;
+}
+.modal_content .left input::placeholder {
+  color: #dcdce0;
+  font-size: 14px;
+}
+.modal_content .right {
+  display: flex;
+  flex-direction: column;
+}
+.modal_content .right .title {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 28px;
+}
+.modal_content .right input {
+  height: 56px;
+  width: 100%;
+  margin-bottom: 16px;
+  background-color: #fafafa;
+  padding-left: 28px;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+.modal_content .right input.correct {
+  background-color: #eaf8ef;
+  border: 1px solid #28c358;
+}
+.modal_content .right .buttons {
+  margin-top: 84px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.modal_content .right .buttons .delete {
+  margin-right: 44px;
+  color: #a0a1a2;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal_content .right .buttons .delete svg {
+  margin-right: 5px;
+}
+.modal_content .right .buttons .save {
+  height: 56px;
+  width: 232px;
+  background: #0735bf;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.modal_content .right .buttons .save svg {
+  margin-right: 5px;
 }
 
 /*# sourceMappingURL=style.css.map */
