@@ -50,6 +50,7 @@ new Vue({
         },
         closeModal: function () {
             this.modal = false;
+            this.resetQuizData();
         },
         change: function ({ target }) {
             this.addError = false;
