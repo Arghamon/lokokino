@@ -131,7 +131,7 @@
                             </a>
                         </div>
                         <div class="add_question">
-                            <a href="#" title="add question" v-on:click="openModal(true)">
+                            <a href="#" title="add question" v-on:click="openModal()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8">
                                     <g id="Group_14" data-name="Group 14" transform="translate(-1608.5 -225.5)">
                                       <path id="Path_23" data-name="Path 23" d="M1605.735,225.5v8" transform="translate(6.765 0)" fill="none" stroke="#fff" stroke-width="1.5"/>
@@ -190,7 +190,7 @@
                                     <div class="quiz_question">In the beginning of the movie, the Joker’s henchman rob a bank. At the end of the scene, a manager asks the Joker what he believes in. What is the Jokers response?</div>
                                     <div class="quiz_edit">
                                         <div class="quiz_edit_click">
-                                            <a href="#" title="edit">
+                                            <a href="#" title="edit" v-on:click="openModal(true, item._id)">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                                                     <g id="Group_29" data-name="Group 29" opacity="0.4">
                                                     <path id="Path_32" data-name="Path 32" d="M0,0H16V16H0Z" fill="none"/>

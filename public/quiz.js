@@ -13,11 +13,13 @@ new Vue({
         title: "",
         comment: "",
         addError: "",
+        mode: "",
+        editId: null,
     },
     mounted: async function () {
         this.storage = firebase.storage();
         this.storageRef = firebase.storage().ref();
-        await this.getQuiz();
+        await this.getQuizes();
     },
     methods: {
         toggleActive: function (id) {
@@ -27,20 +29,23 @@ new Vue({
             }
             this.activeId = id;
         },
-        getQuiz: async function () {
+        getQuizes: async function () {
             this.pending = true;
             const result = await fetch('quiz');
             const { quiz } = await result.json();
             this.items = quiz;
             this.pending = false;
-            console.log(this.items)
         },
-        openModal: function (edit = false) {
+        openModal: async function (edit = false, id = null) {
+            this.mode = "add";
             this.modal = true;
-            if (edit) { 
-                console.log('object')
-                this.title = "asdasd"
-                this.answers = [1]
+            if (edit) {
+                this.mode = "edit";
+                const quiz = await this.getQuiz(id);
+                this.title = quiz.title;
+                this.imageSrc = quiz.image;
+                this.answers = quiz.answers;
+                this.editId = id;
             }
         },
         closeModal: function () {
@@ -69,13 +74,40 @@ new Vue({
             let response = await result.json();
             this.resetQuizData();
             this.closeModal();
-            await this.getQuiz();
+            await this.getQuizes();
         },
         submit: async function () {
-            let answerInputs = document.getElementsByName('answer');
-            answerInputs.forEach(el => this.answers.push(el.value));
-            console.log('submit');
-            await this.addQuestion();
+            if (this.mode == 'add') {
+                let answerInputs = document.getElementsByName('answer');
+                answerInputs.forEach(el => this.answers.push(el.value));
+                console.log('submit');
+                await this.addQuestion();
+            } else {
+                const answers = [];
+                let answerInputs = document.getElementsByName('answer');
+                answerInputs.forEach(el => answers.push(el.value));
+                this.answers = answers;
+                await this.editQuiz();
+            }
+        },
+        editQuiz: async function () {
+            if (!this.title || !this.answers.length || !this.imageSrc) {
+                this.addError = true;
+                return;
+            }
+            movie = {};
+            movie.title = this.title;
+            movie.answers = this.answers;
+            movie.image = this.imageSrc;
+            const result = await fetch(`quiz/${this.editId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(movie)
+            });
+            this.resetQuizData();
+            this.closeModal();
+            await this.getQuizes();
+            console.log(await result.json());
         },
         selectImage: function (e) {
             this.addError = false;
@@ -103,12 +135,18 @@ new Vue({
                 body,
             });
             const data = await result.json();
-            this.getQuiz()
+            this.getQuizes()
+        },
+        getQuiz: async function (id) {
+            const result = await fetch(`quiz/${id}`);
+            const data = await result.json();
+            return data;
         },
         resetQuizData: function () {
             this.title = "",
                 this.answers = [],
                 this.imageSrc = null;
+                this.editId = null;
         }
     },
 })

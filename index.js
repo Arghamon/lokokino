@@ -19,9 +19,11 @@ app.use(cors());
 app.route('/quiz')
     .get(QuizController.Index)
     .post(QuizController.Add)
-    .put(QuizController.Update)
     .delete(QuizController.Delete)
 
+app.route('/quiz/:id')
+    .put(QuizController.Update)
+    .get(QuizController.Show)
 
 app.route('/movies')
     .get(MovieController.Index)

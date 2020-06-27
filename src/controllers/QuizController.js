@@ -18,11 +18,11 @@ QuizController.prototype.Index = function (req, res) {
 }
 
 QuizController.prototype.Update = function (req, res) {
-    const { quizID, title, answers } = req.body;
-    let quiz = Quiz.findById(quizID)
-    quiz.updateOne({ title, answers }).then(() => {
-        res.status(200).json({ message: "movie title has been updated" })
-    })
+    const { id } = req.params;
+    const { title, answers, image } = req.body;
+    Quiz.findOneAndUpdate({_id: id}, req.body, { new: true }).then((question) => {
+        res.status(200).json({ message: "question has been updated", question })
+    }).catch((e) => res.status(404).json({message: 'error', e}))
 }
 
 QuizController.prototype.Delete = function (req, res) {
@@ -33,6 +33,13 @@ QuizController.prototype.Delete = function (req, res) {
             res.status(200).json({ message: `${data.n} object was deleted` })
         })
         .catch(e => errorRsponse(res, 101, e));
+}
+
+QuizController.prototype.Show = function (req, res) {
+    const { id } = req.params;
+    Quiz.findById(id)
+        .then((quiz) => res.status(200).json(quiz))
+        .catch(e => res.status(404).json({ message: 'error' }));
 }
 
 
