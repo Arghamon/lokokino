@@ -131,7 +131,7 @@
                             </a>
                         </div>
                         <div class="add_question">
-                            <a href="#" title="add question" v-on:click="openModal">
+                            <a href="#" title="add question" v-on:click="openModal(true)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8">
                                     <g id="Group_14" data-name="Group 14" transform="translate(-1608.5 -225.5)">
                                       <path id="Path_23" data-name="Path 23" d="M1605.735,225.5v8" transform="translate(6.765 0)" fill="none" stroke="#fff" stroke-width="1.5"/>
@@ -250,11 +250,11 @@
                     <input type="text" class="comment" placeholder="add comment"/>
                 </div>
                 <div class="right">
-                    <span class="title">Add answers</span>
-                    <input class="answer correct" type="text" placeholder="correct answer" name="title" v-on:input="change"/>
-                    <input class="answer" type="text" placeholder="type answer here" name="answer"/>
-                    <input class="answer" type="text" placeholder="type answer here" name="answer"/>
-                    <input class="answer" type="text" placeholder="type answer here" name="answer"/>
+                    <span class="title" >Add answers</span>
+                    <input class="answer correct" type="text" v-bind:value="title" placeholder="correct answer" name="title" v-on:input="change"/>
+                    <input class="answer" type="text" placeholder="type answer here" name="answer" v-bind:value="answers[0]"/>
+                    <input class="answer" type="text" placeholder="type answer here" name="answer" v-bind:value="answers[1]"/>
+                    <input class="answer" type="text" placeholder="type answer here" name="answer" v-bind:value="answers[2]"/>
                     <div class="buttons">
                         <span class="delete">
                             <svg id="Group_30" data-name="Group 30" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">

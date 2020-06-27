@@ -35,8 +35,13 @@ new Vue({
             this.pending = false;
             console.log(this.items)
         },
-        openModal: function () {
+        openModal: function (edit = false) {
             this.modal = true;
+            if (edit) { 
+                console.log('object')
+                this.title = "asdasd"
+                this.answers = [1]
+            }
         },
         closeModal: function () {
             this.modal = false;
@@ -62,6 +67,7 @@ new Vue({
                 body: JSON.stringify(movie)
             });
             let response = await result.json();
+            this.resetQuizData();
             this.closeModal();
             await this.getQuiz();
         },
@@ -99,6 +105,11 @@ new Vue({
             const data = await result.json();
             this.getQuiz()
         },
+        resetQuizData: function () {
+            this.title = "",
+                this.answers = [],
+                this.imageSrc = null;
+        }
     },
 })
 
