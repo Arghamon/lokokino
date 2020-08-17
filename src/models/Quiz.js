@@ -17,6 +17,10 @@ const QuizSchema = new Schema({
     answers: {
         type: [String],
         required: true
+    },
+    tags: {
+        type: [String],
+        required: true
     }
 })
 

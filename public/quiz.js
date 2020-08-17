@@ -3,6 +3,7 @@ new Vue({
     data: {
         activeId: null,
         items: [],
+        tags: '',
         pending: false,
         modal: false,
         file: null,
@@ -33,6 +34,7 @@ new Vue({
             this.pending = true;
             const result = await fetch('quiz');
             const { quiz } = await result.json();
+            console.log(quiz[40]);
             this.items = quiz;
             this.pending = false;
         },
@@ -45,6 +47,7 @@ new Vue({
                 this.title = quiz.title;
                 this.imageSrc = quiz.image;
                 this.answers = quiz.answers;
+                this.tags = quiz.tags;
                 this.editId = id;
             }
         },
@@ -55,10 +58,11 @@ new Vue({
         change: function ({ target }) {
             this.addError = false;
             if (target.name == 'answer') return;
-            target.name == 'title' ? this.title = target.value : this.comment = target.value
+            target.name == 'title' ? this.title = target.value : this.tags = target.value
+            console.log(this.tags);
         },
         addQuestion: async function () {
-            if (!this.title || !this.answers.length || !this.imageSrc) {
+            if (!this.title || !this.answers.length || !this.imageSrc || !this.tags) {
                 this.addError = true;
                 return;
             }
@@ -66,6 +70,7 @@ new Vue({
             movie.title = this.title;
             movie.answers = this.answers;
             movie.image = this.imageSrc;
+            movie.tags = this.tags.split(',');
 
             let result = await fetch('quiz', {
                 method: 'POST',
@@ -92,7 +97,7 @@ new Vue({
             }
         },
         editQuiz: async function () {
-            if (!this.title || !this.answers.length || !this.imageSrc) {
+            if (!this.title || !this.answers.length || !this.imageSrc || !this.tags) {
                 this.addError = true;
                 return;
             }
@@ -100,6 +105,7 @@ new Vue({
             movie.title = this.title;
             movie.answers = this.answers;
             movie.image = this.imageSrc;
+            movie.tags = this.tags.split(',');
             const result = await fetch(`quiz/${this.editId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -151,6 +157,7 @@ new Vue({
         }
     },
 })
+
 
 
 

@@ -13,14 +13,16 @@ QuizController.prototype.Add = function (req, res) {
 }
 QuizController.prototype.Index = function (req, res) {
     const quiz = Quiz.find().then((data) => {
-        res.status(200).json({ quiz: data })
+        res.status(200).json({ quiz: data.reverse() })
     })
 }
 
 QuizController.prototype.Update = function (req, res) {
     const { id } = req.params;
-    const { title, answers, image } = req.body;
+    const { title, answers, image, tags } = req.body;
+    console.log('update', req.body)
     Quiz.findOneAndUpdate({_id: id}, req.body, { new: true }).then((question) => {
+        console.log(question, body)
         res.status(200).json({ message: "question has been updated", question })
     }).catch((e) => res.status(404).json({message: 'error', e}))
 }
