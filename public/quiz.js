@@ -47,7 +47,7 @@ new Vue({
                 this.title = quiz.title;
                 this.imageSrc = quiz.image;
                 this.answers = quiz.answers;
-                this.tags = quiz.tags;
+                this.tags = quiz.tags.join(',');
                 this.editId = id;
             }
         },
@@ -114,7 +114,6 @@ new Vue({
             this.resetQuizData();
             this.closeModal();
             await this.getQuizes();
-            console.log(await result.json());
         },
         selectImage: function (e) {
             this.addError = false;
@@ -151,8 +150,8 @@ new Vue({
         },
         resetQuizData: function () {
             this.title = "",
-            this.answers = [],
-            this.imageSrc = null;
+                this.answers = [],
+                this.imageSrc = null;
             this.editId = null;
             this.tags = "";
         }
