@@ -151,9 +151,10 @@ new Vue({
         },
         resetQuizData: function () {
             this.title = "",
-                this.answers = [],
-                this.imageSrc = null;
-                this.editId = null;
+            this.answers = [],
+            this.imageSrc = null;
+            this.editId = null;
+            this.tags = "";
         }
     },
 })
