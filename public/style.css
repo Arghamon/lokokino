@@ -328,8 +328,17 @@ div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing
   transition: all 0.2s ease-in-out;
 }
 div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing div.quiz_column div.quiz_footer {
-  height: 57px;
+  height: auto;
   background-color: #fff;
+  padding: 40px;
+}
+div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing div.quiz_column div.quiz_footer span a {
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+}
+div.admin_wrap div.admin_content div.content_quiz div.container div.quiz_listing div.quiz_column div.quiz_footer span a.active {
+  color: #28c358;
 }
 
 .modal {

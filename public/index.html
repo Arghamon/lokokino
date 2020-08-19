@@ -118,6 +118,7 @@
                                     </g>
                                 </svg>
                                 <span>Newer first</span>
+                                <span style="margin-left: 30px; font-size: 16px;">{{itemCount}} items</span>
                             </a>
                         </div>
                     </div>
@@ -216,7 +217,10 @@
                             <div v-else>...pending</div>
                         </div>
                         <div class="quiz_footer">
-                            <!-- Pagination -->
+                            <span v-for="index in pageCount">
+                                <a href="" v-on:click="goToPage($event, index)" v-bind:class="{ active: activePage == index }">{{index}}</a>
+                                &nbsp;&nbsp;
+                            </span>
                         </div>
                     </div>
                 </div>

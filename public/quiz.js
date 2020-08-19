@@ -1,6 +1,8 @@
 new Vue({
     el: "#container",
     data: {
+        pageCount: 0,
+        activePage: 1,
         activeId: null,
         items: [],
         tags: '',
@@ -16,6 +18,7 @@ new Vue({
         addError: "",
         mode: "",
         editId: null,
+        itemCount: 0,
     },
     mounted: async function () {
         this.storage = firebase.storage();
@@ -30,12 +33,13 @@ new Vue({
             }
             this.activeId = id;
         },
-        getQuizes: async function () {
+        getQuizes: async function (page) {  
             this.pending = true;
-            const result = await fetch('quiz');
-            const { quiz } = await result.json();
-            console.log(quiz[40]);
+            const result = await fetch(`quiz?page=${page || 1}`);
+            const { quiz, pageCount, count } = await result.json();
             this.items = quiz;
+            this.pageCount = pageCount;
+            this.itemCount = count;
             this.pending = false;
         },
         openModal: async function (edit = false, id = null) {
@@ -54,6 +58,11 @@ new Vue({
         closeModal: function () {
             this.modal = false;
             this.resetQuizData();
+        },
+        goToPage: async function (e, index) {
+            e.preventDefault();
+            this.activePage = index;
+            await this.getQuizes(index);
         },
         change: function ({ target }) {
             this.addError = false;
