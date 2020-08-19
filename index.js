@@ -9,7 +9,8 @@ const bodyParser = require('body-parser');
 const Movie = require('./src/models/Movie');
 const https = require('http');
 const fs = require('fs');
-var cors = require('cors')
+var cors = require('cors');
+const GameController = require('./src/controllers/GameController');
 
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(express.static('public'));
@@ -20,6 +21,12 @@ app.route('/quiz')
     .get(QuizController.Index)
     .post(QuizController.Add)
     .delete(QuizController.Delete)
+
+app.route('/get_question')
+    .post(GameController.GetNewQuestion)
+
+app.route('/check_question')
+    .post(GameController.CheckQuestion)
 
 app.route('/quiz/:id')
     .put(QuizController.Update)

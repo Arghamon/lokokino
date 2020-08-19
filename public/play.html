@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Meet The Scene</title>
+    <link rel="stylesheet" href="/reset.css" />
+    <link rel="icon" href="icon.png">
+    <link rel="stylesheet" href="/game.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <img id="background_image" class="blurred_cover" />
+    <main>
+        <div>
+            <div class="quiz-cont" unselectable="on">
+                <hr />
+                <div class="image_container">
+                    <img alt="" class="q_image" id="question_image" />
+                    <div id="result_container" class="result_container ">
+                        <p id="result_title" class="result_title">Correct</p>
+                        <button id="submit_button" class="submit_button">
+                            Next
+                        </button>
+                        <a id="image_link" target="blank" class="image_link">Meet the Scene</a>
+                    </div>
+                </div>
+
+                <div class="answers_cont">
+                    <div class="answer_item answer_item_active">
+                        <p class="answer_text">2001 A Space Odyssey</p>
+                    </div>
+                    <div class="answer_item answer_item_active">
+                        <p class="answer_text">2001 A Space Odyssey</p>
+                    </div>
+                    <div class="answer_item answer_item_active">
+                        <p class="answer_text">2001 A Space Odyssey</p>
+                    </div>
+                    <div class="answer_item answer_item_active">
+                        <p class="answer_text">2001 A Space Odyssey</p>
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="life_bar">
+                <p class="life life_filled" />
+                <p class="life life_filled" />
+                <p class="life life_filled" />
+            </div>
+    </main>
+    <script src="./app.js"></script>
+</body>
+
+</html>
