@@ -33,7 +33,7 @@ new Vue({
             }
             this.activeId = id;
         },
-        getQuizes: async function (page) {  
+        getQuizes: async function (page) {
             this.pending = true;
             const result = await fetch(`quiz?page=${page || 1}`);
             const { quiz, pageCount, count } = await result.json();
@@ -63,6 +63,7 @@ new Vue({
             e.preventDefault();
             this.activePage = index;
             await this.getQuizes(index);
+            window.scrollTo({ top: 0});
         },
         change: function ({ target }) {
             this.addError = false;
