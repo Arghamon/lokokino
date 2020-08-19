@@ -89,7 +89,7 @@ new Vue({
             let response = await result.json();
             this.resetQuizData();
             this.closeModal();
-            await this.getQuizes();
+            await this.getQuizes(1);
         },
         submit: async function () {
             if (this.mode == 'add') {
