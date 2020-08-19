@@ -9,10 +9,13 @@ GameController.prototype.GetNewQuestion = async function (req, res) {
 
     const answers = []
 
-    answers.push({ label: movie.title, id: movie._id })
+    const correctAnswerIndex = parseInt(Math.random() * 4)
+
     movie.answers.forEach((label, id) => {
         answers.push({ id: id + 1, label })
     });
+
+    answers.splice(correctAnswerIndex, 0, { label: movie.title, id: movie._id })
 
     res.status(200).json({ id: movie._id, answers, image: movie.image })
 }
