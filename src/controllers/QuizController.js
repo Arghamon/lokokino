@@ -11,8 +11,10 @@ QuizController.prototype.Add = function (req, res) {
         addMovie(movie.title);
     }).catch(() => console.log('oops'));
 }
+
 QuizController.prototype.Index = function (req, res) {
     const { page } = req.query;
+    console.log('page');
     const skip = 30 * (page - 1);
     const limit = 30 * page;
     const quiz = Quiz.find().sort({ '_id': -1 }).skip(skip).limit(limit).then((data) => {
