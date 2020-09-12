@@ -14,9 +14,10 @@ QuizController.prototype.Add = function (req, res) {
 
 QuizController.prototype.Index = function (req, res) {
     const { page } = req.query;
-    console.log('page');
-    const skip = 30 * (page - 1);
-    const limit = 30 * page;
+    const skip = 10 * page;
+    const limit = 10;
+
+    console.log(skip, limit)
     const quiz = Quiz.find().sort({ '_id': -1 }).skip(skip).limit(limit).then((data) => {
         Quiz.countDocuments().then(count => {
             let pageCount = Math.ceil(count / 30)
