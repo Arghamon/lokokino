@@ -22,6 +22,9 @@ app.route('/quiz')
     .post(QuizController.Add)
     .delete(QuizController.Delete)
 
+app.route('/delete_quiz')
+    .post(QuizController.Delete)
+
 app.route('/get_question')
     .post(GameController.GetNewQuestion)
 
