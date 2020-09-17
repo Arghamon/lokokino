@@ -36,13 +36,13 @@ QuizController.prototype.Update = function (req, res) {
 }
 
 QuizController.prototype.Delete = function (req, res) {
-    const { id } = req.body;
-    Quiz.deleteOne({ _id: id })
+    const { ids } = req.body;
+    Quiz.deleteMany({ _id: { $in: ids } })
         .then((data) => {
             if (data.n < 1) return res.status(404).json({ message: 'object not found' });
             res.status(200).json({ message: `${data.n} object was deleted` })
         })
-        .catch(e => errorRsponse(res, 101, e));
+        .catch(e => res.status(400).json({ message: e }));
 }
 
 QuizController.prototype.Show = function (req, res) {
