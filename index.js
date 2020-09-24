@@ -16,6 +16,7 @@ app.use(bodyParser.json({ limit: '5mb' }));
 app.use(express.static('public'));
 app.use(cors());
 
+app.get('/play', (req, res) => res.sendFile('/public/game/index.html', {root: __dirname }));
 
 app.route('/quiz')
     .get(QuizController.Index)
