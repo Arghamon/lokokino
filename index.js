@@ -16,7 +16,7 @@ app.use(bodyParser.json({ limit: '5mb' }));
 app.use(express.static('public'));
 app.use(cors());
 
-app.get('/play', (req, res) => res.sendFile('/public/game/index.html', {root: __dirname }));
+app.get('/play', (req, res) => res.sendFile('/public/game/index.html', { root: __dirname }));
 
 app.route('/quiz')
     .get(QuizController.Index)
@@ -42,6 +42,9 @@ app.route('/movies')
 
 app.route('/movies/autocomplete')
     .post(MovieController.Autocomplete)
+
+app.route('/quiz/autocomplete')
+    .post(QuizController.Autocomplete)
 
 app.route('/movies/:id')
     .get(MovieController.Show)

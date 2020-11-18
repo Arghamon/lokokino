@@ -52,6 +52,13 @@ QuizController.prototype.Show = function (req, res) {
         .catch(e => res.status(404).json({ message: 'error' }));
 }
 
+QuizController.prototype.Autocomplete = function (req, res) {
+    const { title } = req.body;
+    Quiz.find({ title: { $regex: title, $options: 'i' } }).then((result) => {
+        res.json({ result })
+    }).catch(e => console.log(e))
+}
+
 
 
 function addMovie(title) {
