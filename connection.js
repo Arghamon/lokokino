@@ -16,10 +16,11 @@ const options = {
     useUnifiedTopology: true
   }
 
-module.exports = mongoose.connect('mongodb://movie:N$E8Ax.U8U48c5R@ds141284.mlab.com:41284/moviequizz', options);
+module.exports = mongoose.connect('mongodb+srv://Lokokino:artpass123@cluster0.3y4rg.mongodb.net/lokokino?retryWrites=true&w=majority', options);
 
 mongoose.connection.once('open', () => {
     console.log('connected to mongoDB')
 }).on('error', (error) => {
     console.log('connection error: ' + error)
 })
+
