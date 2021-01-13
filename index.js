@@ -11,6 +11,7 @@ const https = require('http');
 const fs = require('fs');
 var cors = require('cors');
 const GameController = require('./src/controllers/GameController');
+const authorize = require('./src/middlewares/authorize');
 
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(express.static('public'));
@@ -19,12 +20,12 @@ app.use(cors());
 app.get('/play', (req, res) => res.sendFile('/public/game/index.html', { root: __dirname }));
 
 app.route('/quiz')
-    .get(QuizController.Index)
-    .post(QuizController.Add)
-    .delete(QuizController.Delete)
+    .get(authorize, QuizController.Index)
+    .post(authorize, QuizController.Add)
+    .delete(authorize, QuizController.Delete)
 
 app.route('/delete_quiz')
-    .post(QuizController.Delete)
+    .post(authorize, QuizController.Delete)
 
 app.route('/get_question')
     .post(GameController.GetNewQuestion)
@@ -33,23 +34,23 @@ app.route('/check_question')
     .post(GameController.CheckQuestion)
 
 app.route('/quiz/:id')
-    .put(QuizController.Update)
-    .get(QuizController.Show)
+    .put(authorize, QuizController.Update)
+    .get(authorize, QuizController.Show)
 
 app.route('/movies')
-    .get(MovieController.Index)
-    .post(MovieController.Create)
+    .get(authorize, MovieController.Index)
+    .post(authorize, MovieController.Create)
 
 app.route('/movies/autocomplete')
-    .post(MovieController.Autocomplete)
+    .post(authorize, MovieController.Autocomplete)
 
 app.route('/quiz/autocomplete')
-    .post(QuizController.Autocomplete)
+    .post(authorize, QuizController.Autocomplete)
 
 app.route('/movies/:id')
-    .get(MovieController.Show)
-    .put(MovieController.Update)
-    .delete(MovieController.Delete)
+    .get(authorize, MovieController.Show)
+    .put(authorize, MovieController.Update)
+    .delete(authorize, MovieController.Delete)
 
 app.route('/login')
     .post(UserController.Login)
@@ -57,11 +58,14 @@ app.route('/login')
 app.route('/manage/login')
     .post(AdminController.Login)
 
+app.route('/manage/refresh')
+    .post(AdminController.RefreshToken)
+
 app.route('/manage/add')
-    .post(AdminController.Add)
+    .post(authorize, AdminController.Add)
 
 app.route('/manage/get')
-    .post(AdminController.Get)
+    .post(authorize, AdminController.Get)
 
 const httpsOptions = {
     key: fs.readFileSync('./security/key.pem'),
