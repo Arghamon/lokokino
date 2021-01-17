@@ -15,6 +15,7 @@ function encryptPassword(password) {
 
 AdminController.prototype.Login = function (req, res) {
     const { email, password } = req.body;
+    console.log(email, password)
     Admin.findOne({ email }).then((user) => {
         if (!user)
             return res.status(404).json({ message: 'email incorrect' })
@@ -54,6 +55,10 @@ AdminController.prototype.RefreshToken = function (req, res) {
         if (!token) {
             return res.status(400).json({ message: "refresh token is invalid" });
         }
+
+        if(token.used) {
+            return res.status(400).json({ message: "token alreay used" });
+        }
         const now = Date.now();
         const expire = token.expireDate.getTime();
 
@@ -62,7 +67,10 @@ AdminController.prototype.RefreshToken = function (req, res) {
         }
 
         const { accessToken, refreshToken } = GenerateToken(token.user);
-        return res.status(200).json({ token: accessToken, refreshToken });
+        RefreshToken.findByIdAndUpdate(token.id, {used: true}).then((e) => {
+            console.log(e)
+            return res.status(200).json({ token: accessToken, refreshToken });
+        });
     }).catch(e => console.log(e.message));
 }
 

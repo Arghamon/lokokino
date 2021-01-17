@@ -14,6 +14,10 @@ const RefreshTokenSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         required: true,
+    },
+    used: {
+        type: Boolean,
+        required: true,
     }
 })
 

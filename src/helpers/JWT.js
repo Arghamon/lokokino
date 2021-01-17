@@ -8,10 +8,12 @@ function GenerateToken(userId) {
     const date = new Date();
     const refreshToken = new RefreshToken({
         user: userId,
-        expireDate: new Date(date.setMonth(date.getMonth() + 1))
+        expireDate: new Date(date.setMonth(date.getMonth() + 1)),
+        token: uuidv4(),
+        used: false,
     });
 
-    refreshToken.save().catch( e => e);
+    refreshToken.save().catch( e => console.log(e));
 
     return { accessToken, refreshToken: refreshToken.id }
 }
