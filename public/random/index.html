@@ -1,0 +1,176 @@
+<!-- <div style="display: flex">
+    <div>
+        <p>მოთამაშეები</p>
+        <textarea id="players" rows="5"></textarea>
+        <p>კლუბები</p>
+        <textarea id="clubs" rows="5"></textarea>
+    </div>
+    <div id="result">
+
+    </div>
+</div>
+
+<button id='gen'>
+    გენერაცია
+</button> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meet The Scene</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background-color: #333;
+        }
+
+        textarea {
+            width: 150px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .boxes {
+            display: flex;
+            justify-content: center;
+        }
+
+        .box-item p {
+            color: white;
+        }
+
+        .buttonC {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            width: 200px;
+            height: 50px;
+            /* border-radius: 10px; */
+        }
+
+        .result {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="boxes">
+            <div class="box-item">
+                <p>ჩემი ბულკები</p>
+                <textarea id="players" cols="15" rows="10"></textarea>
+            </div>
+            <div class="box-item">
+                <p>კლუბები</p>
+                <textarea id="clubs" cols="15" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="buttonC">
+            <button id='gen'>გენერირება</button>
+        </div>
+        <div class="result" id="result">
+
+        </div>
+    </div>
+</body>
+
+</html>
+<html>
+
+
+</html>
+
+
+
+<script>
+    const playerBox = document.getElementById('players');
+    const clubBox = document.getElementById('clubs');
+    const resultBox = document.getElementById('result');
+    const button = document.getElementById('gen');
+    let a = null;
+    let b = null;
+
+    let generated = false;
+
+
+    button.addEventListener('click', generate);
+
+    function generate() {
+        var players = playerBox.value.split('\n').filter(x => !!x);
+        var clubs = clubBox.value.split('\n').filter(x => !!x);
+        a = null;
+        b = null;
+
+        if (clubs.length > 0)
+            if (players.length != clubs.length) {
+                alert('რაოდენობა არ ემთხვევა, კლუბები თუ არ გინდა, არ შევასო ვაფშე');
+                return;
+            }
+
+        if (generated) {
+            if (!confirm('თავიდან რატომ შვები, გოგა წუწუნებს?')) return;
+        }
+
+        var max = players.length;
+        var pShuffle = [];
+        var cShuffle = [];
+
+
+        for (var i = 0; i < max; i++) {
+            var pRes = players.splice(getRandomInt(max - i), 1)[0];
+            var cRes = clubs.splice(getRandomInt(max - i), 1)[0];
+
+            pShuffle.push(pRes);
+            cShuffle.push(cRes);
+        }
+
+        const biscOpts = { max, players: pShuffle }
+
+        var mixedArr = pShuffle.map((x, i) => `${x} - ${!cShuffle[i] ? biscuitize(biscOpts, i) : cShuffle[i]}`);
+
+        result.innerHTML = 'მოიცა, ვფიქრობ...'
+
+        setTimeout(() => {
+            result.innerHTML = mixedArr.map(x => `<p>${x}</p>`).join(" ");
+        }, 1500)
+
+
+        generated = true;
+    }
+
+    function biscuitize({ max, players }, i) {
+
+        if (i == 0) {
+            b = getRandomInt(max);
+            a = getRandomInt(max);
+        }
+
+        console.log(a, b, max);
+
+        if (i == b && a != b) return `(${players[a]}ს ბულკი) ${i + 1}`;
+        if (i == a) return `(მაგარი იგროკია)`;
+        return i + 1;
+    }
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+</script>
